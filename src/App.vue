@@ -30,12 +30,25 @@ export default {
   },
   methods: {
     toggle () {
+      console.log("hey")
       if (this.animating) {
         // avoid any action if button clicked when animated
         return
       }
+      if (this.open){
+        console.log("left");
+                            TweenMax.to(this.$refs.left, 1, { fontSize: 30, ease: Sine.easeOut, autoRound: false, delay: 1})
+                                                TweenMax.to(this.$refs.right, 1, { fontSize: 50, ease: Sine.easeOut, autoRound: false, delay: 1})
+
+
+
+      } else {console.log("right")
+                    TweenMax.to(this.$refs.left, 1, { fontSize: 50, ease: Sine.easeOut, autoRound: false, delay: 1})
+                                                TweenMax.to(this.$refs.right, 1, { fontSize: 30, ease: Sine.easeOut, autoRound: false, delay: 1})
+
+
+}
       this.open = !this.open
-      TweenMax.to(this.$refs.left, 1, { fontSize: 40, ease: Sine.easeOut, autoRound: false, delay: 1})
       this.animateButton()
     },
     animateButton () {
@@ -43,16 +56,17 @@ export default {
 
       // animate out
       const propsOut = {
+        fontSize:20,
         scale: 0,
         ease: Back.easeIn,
         onComplete: this.animateIn
       }
       TweenMax.to(this.$refs.actionbtn, 0.2, propsOut)
+
     },
     animateIn () {
       // set new position
       TweenMax.set(this.$refs.actionbtn, this.actionBtnPosition)
-      TweenMax.to(this.$refs.left, 0, { fontSize: 20, ease: Sine.easeOut, autoRound: false, delay: 1})
 
       const propsIn = {
         delay: 0.4,
@@ -66,6 +80,7 @@ export default {
         rotation: this.actionBtnRotation,
         onComplete: this.endedAnimating
       }
+      
       TweenMax.to(this.$refs.actionbtn, 0.3, propsRotation)
     },
     endedAnimating () {
@@ -151,6 +166,7 @@ fill: white;
 .title {
     color: white;
     top: 80px;
+    font-size: 30px;
     /* left: 0; */
     /* right: 0; */
     text-align: center;
